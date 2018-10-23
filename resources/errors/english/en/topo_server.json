@@ -60,5 +60,5 @@
 	"1101036": "the instance has been associated by [%s], coule not be delete or archived",
 	"1101037": "the object [%s] has been instantiated and cannot be deleted",
 	"1101038": "the associations %s->%s already exist",
-	"": "" 
+	"": ""
 }

@@ -17,12 +17,13 @@ import (
 	"fmt"
 	"net/http"
 
+	"strings"
+
 	"github.com/tencent/bk-cmdb/common"
 	"github.com/tencent/bk-cmdb/common/blog"
 	"github.com/tencent/bk-cmdb/common/mapstr"
 	meta "github.com/tencent/bk-cmdb/common/metadata"
 	"github.com/tencent/bk-cmdb/common/util"
-	"strings"
 )
 
 // PHPAPI ee,ce version api
@@ -319,7 +320,7 @@ func (lgc *Logics) UpdateCustomProperty(hostID, appID int64, proeprtyJson map[st
 	phpapi := lgc.NewPHPAPI(header)
 	propertys, err := phpapi.GetCustomerPropertyByOwner(common.BKInnerObjIDHost)
 	if nil != err {
-		blog.Errorf("UpdateCustomProperty error:%s,, hostID:%d, appID:%d, property:%s", hostID, appID, proeprtyJson)
+		blog.Errorf("UpdateCustomProperty error:%s, hostID:%d, appID:%d, property:%s", hostID, appID, proeprtyJson)
 		return nil, defErr.Error(common.CCErrCommSearchPropertyFailed)
 	}
 	params := make(common.KvMap)
@@ -337,7 +338,7 @@ func (lgc *Logics) UpdateCustomProperty(hostID, appID int64, proeprtyJson map[st
 	}
 	res, err := phpapi.UpdateHostMain(hostCondition, params, appID)
 	if nil != err {
-		blog.Errorf("UpdateCustomProperty error:%s,, hostID:%d, appID:%d, property:%s", hostID, appID, proeprtyJson)
+		blog.Errorf("UpdateCustomProperty error:%s, hostID:%d, appID:%d, property:%s", err.Error(), hostID, appID, proeprtyJson)
 		return nil, defErr.Error(common.CCErrHostModifyFail)
 	}
 
