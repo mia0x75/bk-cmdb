@@ -18,13 +18,12 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/tencent/bk-cmdb/common/metadata"
-
 	"github.com/tencent/bk-cmdb/apimachinery"
 	"github.com/tencent/bk-cmdb/common"
 	"github.com/tencent/bk-cmdb/common/blog"
 	"github.com/tencent/bk-cmdb/common/condition"
 	frtypes "github.com/tencent/bk-cmdb/common/mapstr"
+	"github.com/tencent/bk-cmdb/common/metadata"
 	meta "github.com/tencent/bk-cmdb/common/metadata"
 
 	"github.com/tencent/bk-cmdb/scene_server/topo_server/core/types"
@@ -652,8 +651,11 @@ func (o *object) Save(data frtypes.MapStr) error {
 		return o.Update(o.obj.ToMapStr())
 	}
 
-	return o.Create()
+	if o.obj.ObjIcon == "" {
+		return o.params.Err.Errorf(common.CCErrCommParamsNeedSet, common.BKObjIconField)
+	}
 
+	return o.Create()
 }
 
 func (o *object) CreateGroup() Group {

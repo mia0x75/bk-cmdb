@@ -13,17 +13,17 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"runtime"
 
-	"github.com/tencent/bk-cmdb/common/blog"
-	"github.com/tencent/bk-cmdb/common/util"
-	"github.com/tencent/bk-cmdb/web_server/application"
-	"github.com/tencent/bk-cmdb/web_server/application/options"
-
 	"github.com/tencent/bk-cmdb/common"
+	"github.com/tencent/bk-cmdb/common/blog"
 	"github.com/tencent/bk-cmdb/common/types"
+	"github.com/tencent/bk-cmdb/common/util"
+	"github.com/tencent/bk-cmdb/web_server/app"
+	"github.com/tencent/bk-cmdb/web_server/app/options"
 
 	"github.com/spf13/pflag"
 )
@@ -40,8 +40,9 @@ func main() {
 
 	util.InitFlags()
 
-	if err := app.Run(op); err != nil {
-		fmt.Fprintf(os.Stderr, "exit:%v\n", err)
-		blog.Fatal(err)
+	if err := app.Run(context.Background(), op); err != nil {
+		fmt.Fprintf(os.Stderr, "%v\n", err)
+		blog.CloseLogs()
+		os.Exit(1)
 	}
 }

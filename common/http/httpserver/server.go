@@ -13,12 +13,13 @@
 package httpserver
 
 import (
-	"github.com/tencent/bk-cmdb/common/blog"
-	"github.com/tencent/bk-cmdb/common/ssl"
 	"fmt"
 	"net"
 	"net/http"
 	"strconv"
+
+	"github.com/tencent/bk-cmdb/common/blog"
+	"github.com/tencent/bk-cmdb/common/ssl"
 
 	"github.com/emicklei/go-restful"
 )
@@ -40,14 +41,6 @@ func NewHttpServer(port uint, addr, sock string) *HttpServer {
 
 	wsContainer := restful.NewContainer()
 
-	// AddUserConfig container filter to enable CORS
-	//	cors := restful.CrossOriginResourceSharing{
-	//		AllowedHeaders: []string{"Content-Type", "Accept"},
-	//		AllowedDomains: []string{},
-	//		CookiesAllowed: true,
-	//		Container:      wsContainer}
-	//	wsContainer.Filter(cors.Filter)
-	//	wsContainer.Filter(wsContainer.OPTIONSFilter)
 	return &HttpServer{
 		addr:         addr,
 		port:         port,

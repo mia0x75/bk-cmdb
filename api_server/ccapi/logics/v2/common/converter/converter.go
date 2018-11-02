@@ -793,7 +793,6 @@ func convMapInterface(data map[string]interface{}) map[string]interface{} {
 			}
 			mapItem[key] = protocal
 		} else if key == "osType" {
-
 			switch realVal := val.(type) {
 			case string:
 				switch realVal {

@@ -13,9 +13,10 @@
 package metadata
 
 import (
+	"testing"
+
 	"github.com/tencent/bk-cmdb/common"
 	types "github.com/tencent/bk-cmdb/common/mapstr"
-	"testing"
 )
 
 func TestObject(t *testing.T) {
@@ -31,7 +32,7 @@ func TestObject(t *testing.T) {
 		t.Fail()
 	}
 
-	if attr.GetObjectType() != common.BKINnerObjIDObject {
+	if attr.GetObjectType() != common.BKInnerObjIDObject {
 		t.Fail()
 	}
 

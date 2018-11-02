@@ -19,13 +19,13 @@ import (
 	"net/http"
 	"strings"
 
-	restful "github.com/emicklei/go-restful"
-
 	"github.com/tencent/bk-cmdb/common"
 	"github.com/tencent/bk-cmdb/common/blog"
 	"github.com/tencent/bk-cmdb/common/core/cc/api"
 	"github.com/tencent/bk-cmdb/common/errors"
 	"github.com/tencent/bk-cmdb/common/util"
+
+	restful "github.com/emicklei/go-restful"
 	"github.com/rs/xid"
 )
 
@@ -150,6 +150,7 @@ func FilterRdAddrSrvs(typeSrvs ...string) func(req *restful.Request, resp *restf
 }
 
 func checkHTTPAuth(req *restful.Request, defErr errors.DefaultCCErrorIf) (int, string) {
+	util.SetActionOwerIDAndAccount(req)
 	ownerId, user := util.GetActionOnwerIDAndUser(req)
 	if "" == ownerId {
 		return common.CCErrCommNotAuthItem, defErr.Errorf(common.CCErrCommNotAuthItem, "owner_id").Error()

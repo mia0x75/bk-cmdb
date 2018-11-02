@@ -13,10 +13,11 @@
 package logics
 
 import (
-	"github.com/tencent/bk-cmdb/common/mapstr"
 	"context"
 	"errors"
 	"fmt"
+
+	"github.com/tencent/bk-cmdb/common/mapstr"
 
 	"github.com/tencent/bk-cmdb/common"
 	"github.com/tencent/bk-cmdb/common/blog"
@@ -34,7 +35,7 @@ func (lgc *Logics) GetObjectByID(ctx context.Context, objType string, fields []s
 		condition[common.BKSetIDField] = id
 	case common.BKInnerObjIDModule:
 		condition[common.BKModuleIDField] = id
-	case common.BKINnerObjIDObject:
+	case common.BKInnerObjIDObject:
 		condition[common.BKInstIDField] = id
 	case common.BKInnerObjIDHost:
 		condition[common.BKHostIDField] = id
